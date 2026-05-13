@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bellamoosh_erp"
+version = "1.0.0"
+description = "Custom ERP for Bellamoosh Lifestyle LLP — Fabric Export"
+authors = [
+    {name = "Bellamoosh Lifestyle LLP", email = "info@bellamoosh.com"}
+]
+dependencies = [
+    "frappe"
+]
+requires-python = ">=3.8"
+
+[tool.setuptools]
+packages = ["bellamoosh_erp"]
+include-package-data = true
+zip-safe = false
