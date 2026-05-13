@@ -1,0 +1,32 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.9'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install frappe
+
+    - name: Check Python syntax
+      run: |
+        python -m py_compile bellamoosh_erp/**/*.py
+
+    - name: Validate JSON files
+      run: |
+        for f in $(find . -name "*.json"); do python -m json.tool "$f" > /dev/null || exit 1; done

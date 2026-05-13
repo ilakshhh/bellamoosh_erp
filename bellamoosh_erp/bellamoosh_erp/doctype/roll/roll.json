@@ -1,0 +1,25 @@
+{
+  "name": "Roll",
+  "module": "Bellamoosh ERP",
+  "doctype": "DocType",
+  "is_submittable": 1,
+  "autoname": "format:ROLL-{#####}",
+  "fields": [
+    {"fieldname": "roll_no", "label": "Roll No", "fieldtype": "Data", "read_only": 1, "in_list_view": 1},
+    {"fieldname": "chart_no", "label": "Chart No", "fieldtype": "Link", "options": "Sales Order", "reqd": 1, "in_list_view": 1},
+    {"fieldname": "color_no", "label": "Color No", "fieldtype": "Data", "reqd": 1, "in_list_view": 1},
+    {"fieldname": "product", "label": "Product", "fieldtype": "Link", "options": "Item", "reqd": 1},
+    {"fieldname": "col_break_1", "fieldtype": "Column Break"},
+    {"fieldname": "total_yards", "label": "Total Yards", "fieldtype": "Float", "read_only": 1},
+    {"fieldname": "total_mtrs", "label": "Total Metres", "fieldtype": "Float", "read_only": 1},
+    {"fieldname": "status", "label": "Status", "fieldtype": "Select",
+      "options": "Open\nIn Carton\nDispatched", "default": "Open", "in_list_view": 1},
+    {"fieldname": "carton_no", "label": "Carton No", "fieldtype": "Link", "options": "Carton", "read_only": 1},
+    {"fieldname": "sec_break_cuttings", "label": "Cutting Details", "fieldtype": "Section Break"},
+    {"fieldname": "cutting_details", "label": "Cutting Details", "fieldtype": "Table", "options": "Roll Cutting Detail"}
+  ],
+  "permissions": [
+    {"role": "Bhiwandi Operator", "read": 1, "write": 1, "create": 1, "submit": 1},
+    {"role": "Headoffice Manager", "read": 1, "write": 1, "create": 1, "submit": 1, "cancel": 1}
+  ]
+}

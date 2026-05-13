@@ -1,0 +1,28 @@
+{
+  "name": "Carton",
+  "module": "Bellamoosh ERP",
+  "doctype": "DocType",
+  "is_submittable": 1,
+  "autoname": "format:CRTN-{#####}",
+  "fields": [
+    {"fieldname": "carton_no", "label": "Carton No", "fieldtype": "Data", "read_only": 1, "in_list_view": 1},
+    {"fieldname": "chart_no", "label": "Chart No", "fieldtype": "Link", "options": "Sales Order", "reqd": 1, "in_list_view": 1},
+    {"fieldname": "product", "label": "Product", "fieldtype": "Link", "options": "Item", "reqd": 1, "in_list_view": 1},
+    {"fieldname": "col_break_1", "fieldtype": "Column Break"},
+    {"fieldname": "total_rolls", "label": "Total Rolls", "fieldtype": "Int", "read_only": 1},
+    {"fieldname": "total_yards", "label": "Total Yards", "fieldtype": "Float", "read_only": 1},
+    {"fieldname": "status", "label": "Status", "fieldtype": "Select",
+      "options": "Packed\nDispatched", "default": "Packed", "in_list_view": 1},
+    {"fieldname": "sec_break_weights", "label": "Weights", "fieldtype": "Section Break"},
+    {"fieldname": "net_weight", "label": "Net Weight (KG)", "fieldtype": "Float"},
+    {"fieldname": "gross_weight", "label": "Gross Weight (KG)", "fieldtype": "Float", "read_only": 1},
+    {"fieldname": "delivery_note_no", "label": "Delivery Note No", "fieldtype": "Link",
+      "options": "Delivery Note", "read_only": 1},
+    {"fieldname": "sec_break_rolls", "label": "Roll Details", "fieldtype": "Section Break"},
+    {"fieldname": "roll_details", "label": "Roll Details", "fieldtype": "Table", "options": "Carton Roll Detail"}
+  ],
+  "permissions": [
+    {"role": "Bhiwandi Operator", "read": 1, "write": 1, "create": 1, "submit": 1},
+    {"role": "Headoffice Manager", "read": 1, "write": 1, "create": 1, "submit": 1, "cancel": 1}
+  ]
+}

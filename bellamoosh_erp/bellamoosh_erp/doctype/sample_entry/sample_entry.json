@@ -1,0 +1,26 @@
+{
+  "name": "Sample Entry",
+  "module": "Bellamoosh ERP",
+  "doctype": "DocType",
+  "autoname": "format:SMPL-{YYYY}-{#####}",
+  "fields": [
+    {"fieldname": "sample_no", "label": "Sample No", "fieldtype": "Data", "read_only": 1, "in_list_view": 1},
+    {"fieldname": "open_date", "label": "Open Date", "fieldtype": "Date", "default": "Today", "reqd": 1},
+    {"fieldname": "vendor", "label": "Vendor", "fieldtype": "Link", "options": "Supplier"},
+    {"fieldname": "chart_no", "label": "Chart No", "fieldtype": "Data", "in_list_view": 1},
+    {"fieldname": "col_break_1", "fieldtype": "Column Break"},
+    {"fieldname": "sample_qty", "label": "Sample Qty (Metres)", "fieldtype": "Float"},
+    {"fieldname": "sample_pcs", "label": "Sample Pcs", "fieldtype": "Int"},
+    {"fieldname": "assigned_to", "label": "Assigned To", "fieldtype": "Link", "options": "User"},
+    {"fieldname": "status", "label": "Status", "fieldtype": "Select",
+      "options": "Open\nSent\nReceived at HO", "default": "Open", "in_list_view": 1},
+    {"fieldname": "branch", "label": "Branch", "fieldtype": "Select",
+      "options": "Surat\nBhiwandi", "reqd": 1},
+    {"fieldname": "remarks", "label": "Remarks", "fieldtype": "Small Text"}
+  ],
+  "permissions": [
+    {"role": "Surat Operator", "read": 1, "write": 1, "create": 1},
+    {"role": "Bhiwandi Operator", "read": 1, "write": 1, "create": 1},
+    {"role": "Headoffice Manager", "read": 1, "write": 1, "create": 1}
+  ]
+}

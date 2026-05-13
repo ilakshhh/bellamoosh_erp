@@ -1,0 +1,301 @@
+[
+  {
+    "doctype": "Custom Field",
+    "module": "Bellamoosh ERP",
+    "dt": "Purchase Order",
+    "fieldname": "chart_no",
+    "label": "Chart No",
+    "fieldtype": "Data",
+    "insert_after": "title"
+  },
+  {
+    "doctype": "Custom Field",
+    "module": "Bellamoosh ERP",
+    "dt": "Purchase Order",
+    "fieldname": "branch",
+    "label": "Branch",
+    "fieldtype": "Select",
+    "options": "Headoffice\nSurat\nBhiwandi",
+    "insert_after": "chart_no"
+  },
+  {
+    "doctype": "Custom Field",
+    "module": "Bellamoosh ERP",
+    "dt": "Purchase Order Item",
+    "fieldname": "chart_no",
+    "label": "Chart No",
+    "fieldtype": "Data",
+    "insert_after": "description"
+  },
+  {
+    "doctype": "Custom Field",
+    "module": "Bellamoosh ERP",
+    "dt": "Purchase Order Item",
+    "fieldname": "color_no",
+    "label": "Color No",
+    "fieldtype": "Data",
+    "insert_after": "chart_no"
+  },
+  {
+    "doctype": "Custom Field",
+    "module": "Bellamoosh ERP",
+    "dt": "Purchase Order Item",
+    "fieldname": "packing_uom",
+    "label": "Packing UOM",
+    "fieldtype": "Link",
+    "options": "UOM",
+    "insert_after": "color_no"
+  },
+  {
+    "doctype": "Custom Field",
+    "module": "Bellamoosh ERP",
+    "dt": "Purchase Receipt",
+    "fieldname": "challan_no",
+    "label": "Challan No",
+    "fieldtype": "Data",
+    "insert_after": "supplier"
+  },
+  {
+    "doctype": "Custom Field",
+    "module": "Bellamoosh ERP",
+    "dt": "Purchase Receipt",
+    "fieldname": "inward_type",
+    "label": "Inward Type",
+    "fieldtype": "Select",
+    "options": "Goods Receipt Note\nSub-contractor",
+    "default": "Goods Receipt Note",
+    "insert_after": "challan_no"
+  },
+  {
+    "doctype": "Custom Field",
+    "module": "Bellamoosh ERP",
+    "dt": "Purchase Receipt",
+    "fieldname": "process_type",
+    "label": "Process Type",
+    "fieldtype": "Select",
+    "options": "\nWashing\nEmbroidery\nKnitting",
+    "depends_on": "eval:doc.inward_type=='Sub-contractor'",
+    "insert_after": "inward_type"
+  },
+  {
+    "doctype": "Custom Field",
+    "module": "Bellamoosh ERP",
+    "dt": "Purchase Receipt",
+    "fieldname": "delivered_by",
+    "label": "Delivered By",
+    "fieldtype": "Data",
+    "insert_after": "process_type"
+  },
+  {
+    "doctype": "Custom Field",
+    "module": "Bellamoosh ERP",
+    "dt": "Purchase Receipt",
+    "fieldname": "gin_number",
+    "label": "GIN Number",
+    "fieldtype": "Data",
+    "read_only": 1,
+    "insert_after": "delivered_by"
+  },
+  {
+    "doctype": "Custom Field",
+    "module": "Bellamoosh ERP",
+    "dt": "Purchase Receipt Item",
+    "fieldname": "taka_no",
+    "label": "Taka No",
+    "fieldtype": "Data",
+    "read_only": 1,
+    "insert_after": "item_code"
+  },
+  {
+    "doctype": "Custom Field",
+    "module": "Bellamoosh ERP",
+    "dt": "Purchase Receipt Item",
+    "fieldname": "chart_no",
+    "label": "Chart No",
+    "fieldtype": "Data",
+    "insert_after": "taka_no"
+  },
+  {
+    "doctype": "Custom Field",
+    "module": "Bellamoosh ERP",
+    "dt": "Purchase Receipt Item",
+    "fieldname": "color_no",
+    "label": "Color No",
+    "fieldtype": "Data",
+    "insert_after": "chart_no"
+  },
+  {
+    "doctype": "Custom Field",
+    "module": "Bellamoosh ERP",
+    "dt": "Purchase Receipt Item",
+    "fieldname": "checked_mtrs",
+    "label": "Checked Mtrs",
+    "fieldtype": "Float",
+    "insert_after": "color_no"
+  },
+  {
+    "doctype": "Custom Field",
+    "module": "Bellamoosh ERP",
+    "dt": "Purchase Receipt Item",
+    "fieldname": "condition",
+    "label": "Condition",
+    "fieldtype": "Select",
+    "options": "\nOK\nProcess\nReturn\nB Grade",
+    "insert_after": "checked_mtrs"
+  },
+  {
+    "doctype": "Custom Field",
+    "module": "Bellamoosh ERP",
+    "dt": "Purchase Receipt Item",
+    "fieldname": "star_mark",
+    "label": "Star Mark",
+    "fieldtype": "Check",
+    "insert_after": "condition"
+  },
+  {
+    "doctype": "Custom Field",
+    "module": "Bellamoosh ERP",
+    "dt": "Stock Entry",
+    "fieldname": "bale_no",
+    "label": "Bale No",
+    "fieldtype": "Data",
+    "insert_after": "title"
+  },
+  {
+    "doctype": "Custom Field",
+    "module": "Bellamoosh ERP",
+    "dt": "Stock Entry",
+    "fieldname": "lr_no",
+    "label": "LR No",
+    "fieldtype": "Data",
+    "insert_after": "bale_no"
+  },
+  {
+    "doctype": "Custom Field",
+    "module": "Bellamoosh ERP",
+    "dt": "Stock Entry",
+    "fieldname": "transporter_name",
+    "label": "Transporter Name",
+    "fieldtype": "Data",
+    "insert_after": "lr_no"
+  },
+  {
+    "doctype": "Custom Field",
+    "module": "Bellamoosh ERP",
+    "dt": "Stock Entry",
+    "fieldname": "challan_no",
+    "label": "Challan No",
+    "fieldtype": "Data",
+    "insert_after": "transporter_name"
+  },
+  {
+    "doctype": "Custom Field",
+    "module": "Bellamoosh ERP",
+    "dt": "Delivery Note",
+    "fieldname": "lr_no",
+    "label": "LR No",
+    "fieldtype": "Data",
+    "insert_after": "title"
+  },
+  {
+    "doctype": "Custom Field",
+    "module": "Bellamoosh ERP",
+    "dt": "Delivery Note",
+    "fieldname": "transporter_name",
+    "label": "Transporter Name",
+    "fieldtype": "Data",
+    "insert_after": "lr_no"
+  },
+  {
+    "doctype": "Custom Field",
+    "module": "Bellamoosh ERP",
+    "dt": "Delivery Note Item",
+    "fieldname": "chart_no",
+    "label": "Chart No",
+    "fieldtype": "Data",
+    "insert_after": "item_code"
+  },
+  {
+    "doctype": "Custom Field",
+    "module": "Bellamoosh ERP",
+    "dt": "Delivery Note Item",
+    "fieldname": "color_no",
+    "label": "Color No",
+    "fieldtype": "Data",
+    "insert_after": "chart_no"
+  },
+  {
+    "doctype": "Custom Field",
+    "module": "Bellamoosh ERP",
+    "dt": "Delivery Note Item",
+    "fieldname": "carton_no",
+    "label": "Carton No",
+    "fieldtype": "Data",
+    "insert_after": "color_no"
+  },
+  {
+    "doctype": "Custom Field",
+    "module": "Bellamoosh ERP",
+    "dt": "Item",
+    "fieldname": "fabric_history",
+    "label": "Fabric History",
+    "fieldtype": "Check",
+    "insert_after": "description"
+  },
+  {
+    "doctype": "Custom Field",
+    "module": "Bellamoosh ERP",
+    "dt": "Item",
+    "fieldname": "channel",
+    "label": "Channel",
+    "fieldtype": "Select",
+    "options": "\nDomestic\nExport",
+    "insert_after": "fabric_history"
+  },
+  {
+    "doctype": "Custom Field",
+    "module": "Bellamoosh ERP",
+    "dt": "Item",
+    "fieldname": "product_inch",
+    "label": "Product Inch",
+    "fieldtype": "Select",
+    "options": "\n36\n44\n48\n54\n58\n60\n72",
+    "insert_after": "channel"
+  },
+  {
+    "doctype": "Custom Field",
+    "module": "Bellamoosh ERP",
+    "dt": "Item",
+    "fieldname": "warp",
+    "label": "Warp",
+    "fieldtype": "Data",
+    "insert_after": "product_inch"
+  },
+  {
+    "doctype": "Custom Field",
+    "module": "Bellamoosh ERP",
+    "dt": "Item",
+    "fieldname": "weft",
+    "label": "Weft",
+    "fieldtype": "Data",
+    "insert_after": "warp"
+  },
+  {
+    "doctype": "Custom Field",
+    "module": "Bellamoosh ERP",
+    "dt": "Item",
+    "fieldname": "reeds",
+    "label": "Reeds",
+    "fieldtype": "Data",
+    "insert_after": "weft"
+  },
+  {
+    "doctype": "Custom Field",
+    "module": "Bellamoosh ERP",
+    "dt": "Item",
+    "fieldname": "picks",
+    "label": "Picks",
+    "fieldtype": "Data",
+    "insert_after": "reeds"
+  }
+]
