@@ -17,7 +17,7 @@ Custom Frappe app for **Bellamoosh Lifestyle LLP** — Fabric Export Operations
 
 1. Clone this repository:
    ```bash
-   git clone https://github.com/YOUR_USERNAME/bellamoosh_erp.git
+   git clone https://github.com/ilakshhh/bellamoosh_erp.git
    ```
 
 2. In your Frappe Cloud site, go to Apps → Install App
