@@ -16,20 +16,20 @@ fixtures = [
 # Document Events
 doc_events = {
     "Purchase Receipt": {
-        "before_save": "bellamoosh_erp.bellamoosh_erp.doctype.taka_checking.taka_checking.validate_challan_duplicate",
-        "on_submit": "bellamoosh_erp.bellamoosh_erp.doctype.taka_checking.taka_checking.auto_generate_taka_nos",
+        "before_save": "bellamoosh_erp.doctype.taka_checking.taka_checking.validate_challan_duplicate",
+        "on_submit": "bellamoosh_erp.doctype.taka_checking.taka_checking.auto_generate_taka_nos",
     },
     "Stock Entry": {
-        "on_submit": "bellamoosh_erp.bellamoosh_erp.doctype.taka_checking.taka_checking.update_bale_status",
+        "on_submit": "bellamoosh_erp.doctype.taka_checking.taka_checking.update_bale_status",
     },
     "Delivery Note": {
-        "on_submit": "bellamoosh_erp.bellamoosh_erp.doctype.carton.carton.mark_cartons_dispatched",
+        "on_submit": "bellamoosh_erp.doctype.carton.carton.mark_cartons_dispatched",
     },
 }
 
 # Scheduled Tasks
 scheduler_events = {
     "daily": [
-        "bellamoosh_erp.bellamoosh_erp.doctype.taka_checking.taka_checking.flag_overdue_processes",
+        "bellamoosh_erp.doctype.taka_checking.taka_checking.flag_overdue_processes",
     ]
 }
