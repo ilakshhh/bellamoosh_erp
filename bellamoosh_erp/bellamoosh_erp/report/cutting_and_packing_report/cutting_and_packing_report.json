@@ -1,4 +1,6 @@
 {
+  "doctype": "Report",
+  "name": "Cutting and Packing Report",
   "report_name": "Cutting and Packing Report",
   "module": "Bellamoosh ERP",
   "report_type": "Script Report",

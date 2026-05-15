@@ -1,4 +1,6 @@
 {
+  "doctype": "Report",
+  "name": "Post Delivery Summary",
   "report_name": "Post Delivery Summary",
   "module": "Bellamoosh ERP",
   "report_type": "Script Report",

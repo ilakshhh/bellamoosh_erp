@@ -1,4 +1,6 @@
 {
+  "doctype": "Report",
+  "name": "Item Flow Report",
   "report_name": "Item Flow Report",
   "module": "Bellamoosh ERP",
   "report_type": "Script Report",
