@@ -12,6 +12,7 @@
     {"fieldname": "received_date", "label": "Received Date", "fieldtype": "Date", "default": "Today"},
     {"fieldname": "col_break_1", "fieldtype": "Column Break"},
     {"fieldname": "gin_no", "label": "GIN No", "fieldtype": "Data"},
+    {"fieldname": "purchase_receipt", "label": "Purchase Receipt", "fieldtype": "Link", "options": "Purchase Receipt", "read_only": 1},
     {"fieldname": "supplier", "label": "Supplier", "fieldtype": "Link", "options": "Supplier"},
     {"fieldname": "star_mark", "label": "Star Mark (Priority)", "fieldtype": "Check"},
     {"fieldname": "status", "label": "Status", "fieldtype": "Select",

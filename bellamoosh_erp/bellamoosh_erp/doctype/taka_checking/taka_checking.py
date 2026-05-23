@@ -11,6 +11,10 @@ class TakaChecking(Document):
         self.calculate_packing_qty()
         self.validate_packing_qty()
         self.categorise_wastage()
+        self._auto_link_purchase_receipt()
+
+    def on_submit(self):
+        self._update_pr_taka_row()
 
     def calculate_war_kata_metres(self):
         if self.war_kata_yards:
@@ -68,12 +72,57 @@ class TakaChecking(Document):
         self.good_cut = round(good_cut, 4)
         self.super_good_cut = round(super_good_cut, 4)
 
+    def _auto_link_purchase_receipt(self):
+        """Look up which Purchase Receipt this taka came from and link it."""
+        if self.taka_no and not self.purchase_receipt:
+            pr_name = frappe.db.get_value(
+                "Purchase Receipt Taka Detail",
+                {"taka_no": self.taka_no},
+                "parent",
+            )
+            if pr_name:
+                self.purchase_receipt = pr_name
 
-def validate_challan_duplicate(doc, method):
-    """Called via hooks on Purchase Receipt before_save"""
-    if doc.challan_no and doc.supplier:
+    def _update_pr_taka_row(self):
+        """On submit, write QC results back to the Purchase Receipt taka row."""
+        if not self.taka_no:
+            return
+        row_name = frappe.db.get_value(
+            "Purchase Receipt Taka Detail",
+            {"taka_no": self.taka_no},
+            "name",
+        )
+        if row_name:
+            frappe.db.set_value("Purchase Receipt Taka Detail", row_name, {
+                "taka_checking": self.name,
+                "wastage": self.total_wastage,
+                "packing_qty_yards": self.packing_qty_yards,
+                "packing_qty_mtrs": self.packing_qty_mtrs,
+                "status": self.status,
+                "checked_date": self.received_date,
+            })
+
+
+# ── Purchase Receipt hooks ────────────────────────────────────────────────────
+
+def before_save_purchase_receipt(doc, method):
+    """Single entry point for all PR before_save logic."""
+    _calculate_taka_detail_mtrs(doc)
+    _validate_challan_duplicate(doc)
+
+
+def _calculate_taka_detail_mtrs(doc):
+    """Auto-calculate war_kata_mtrs for each taka_details row."""
+    for row in getattr(doc, "taka_details", []):
+        if row.war_kata_yards:
+            row.war_kata_mtrs = round(row.war_kata_yards * 0.9144, 4)
+
+
+def _validate_challan_duplicate(doc):
+    challan_no = getattr(doc, "challan_no", None)
+    if challan_no and doc.supplier:
         existing = frappe.db.exists("Purchase Receipt", {
-            "challan_no": doc.challan_no,
+            "challan_no": challan_no,
             "supplier": doc.supplier,
             "name": ("!=", doc.name),
             "docstatus": ("!=", 2),
@@ -82,21 +131,40 @@ def validate_challan_duplicate(doc, method):
             frappe.throw(
                 _("Challan No {0} already exists for supplier {1} in {2}. "
                   "Same challan is allowed for different suppliers only.").format(
-                    doc.challan_no, doc.supplier, existing)
+                    challan_no, doc.supplier, existing)
             )
 
 
 def auto_generate_taka_nos(doc, method):
-    """Auto-generate Taka No on GRN submission: ChartNo-SupplierCode-ColorNo-GINNo-T{seq}"""
-    supplier_code = frappe.db.get_value("Supplier", doc.supplier, "abbr") or doc.supplier[:2].upper()
+    """
+    On PR submit, stamp a Taka No on every taka_details row.
+    Falls back to items rows if taka_details is empty (backward compat).
+    Format: ChartNo-SupplierCode-ColorNo-GINNo-T{seq}
+    """
+    supplier_code = (
+        frappe.db.get_value("Supplier", doc.supplier, "abbr") or doc.supplier[:2].upper()
+    )
     gin_no = doc.name.replace("/", "-")
-    for idx, row in enumerate(doc.items, start=1):
-        if not row.taka_no:
-            chart = row.chart_no or "XX"
-            color = row.color_no or "00"
-            row.taka_no = f"{chart}-{supplier_code}-{color}-{gin_no}-T{idx}"
+    taka_details = getattr(doc, "taka_details", [])
+
+    if taka_details:
+        for idx, row in enumerate(taka_details, start=1):
+            if not row.taka_no:
+                chart = getattr(doc, "chart_no", None) or "XX"
+                color = row.color_no or "00"
+                row.taka_no = f"{chart}-{supplier_code}-{color}-{gin_no}-T{idx}"
+    else:
+        # Legacy: generate one taka per item row
+        for idx, row in enumerate(doc.items, start=1):
+            if not getattr(row, "taka_no", None):
+                chart = getattr(row, "chart_no", None) or "XX"
+                color = getattr(row, "color_no", None) or "00"
+                row.taka_no = f"{chart}-{supplier_code}-{color}-{gin_no}-T{idx}"
+
     doc.save()
 
+
+# ── Stock Entry hook ──────────────────────────────────────────────────────────
 
 def update_bale_status(doc, method):
     """When a Stock Entry (bale transfer) is submitted, update taka status"""
@@ -105,6 +173,8 @@ def update_bale_status(doc, method):
             if row.serial_no:
                 frappe.db.set_value("Serial No", row.serial_no, "warehouse", doc.to_warehouse)
 
+
+# ── Scheduled task ────────────────────────────────────────────────────────────
 
 def flag_overdue_processes(doc=None, method=None):
     """Daily: flag any sub-contractor processes overdue"""

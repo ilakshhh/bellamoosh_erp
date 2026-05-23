@@ -108,6 +108,27 @@
   },
   {
     "doctype": "Custom Field",
+    "name": "Purchase Receipt-sec_taka_details",
+    "module": "Bellamoosh ERP",
+    "dt": "Purchase Receipt",
+    "fieldname": "sec_taka_details",
+    "label": "Taka Receipt Details",
+    "fieldtype": "Section Break",
+    "insert_after": "gin_number"
+  },
+  {
+    "doctype": "Custom Field",
+    "name": "Purchase Receipt-taka_details",
+    "module": "Bellamoosh ERP",
+    "dt": "Purchase Receipt",
+    "fieldname": "taka_details",
+    "label": "Taka Details",
+    "fieldtype": "Table",
+    "options": "Purchase Receipt Taka Detail",
+    "insert_after": "sec_taka_details"
+  },
+  {
+    "doctype": "Custom Field",
     "name": "Purchase Receipt Item-taka_no",
     "module": "Bellamoosh ERP",
     "dt": "Purchase Receipt Item",
@@ -207,26 +228,6 @@
     "label": "Challan No",
     "fieldtype": "Data",
     "insert_after": "transporter_name"
-  },
-  {
-    "doctype": "Custom Field",
-    "name": "Delivery Note-lr_no",
-    "module": "Bellamoosh ERP",
-    "dt": "Delivery Note",
-    "fieldname": "lr_no",
-    "label": "LR No",
-    "fieldtype": "Data",
-    "insert_after": "title"
-  },
-  {
-    "doctype": "Custom Field",
-    "name": "Delivery Note-transporter_name",
-    "module": "Bellamoosh ERP",
-    "dt": "Delivery Note",
-    "fieldname": "transporter_name",
-    "label": "Transporter Name",
-    "fieldtype": "Data",
-    "insert_after": "lr_no"
   },
   {
     "doctype": "Custom Field",

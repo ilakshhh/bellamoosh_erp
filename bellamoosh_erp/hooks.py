@@ -16,7 +16,7 @@ fixtures = [
 # Document Events
 doc_events = {
     "Purchase Receipt": {
-        "before_save": "bellamoosh_erp.bellamoosh_erp.doctype.taka_checking.taka_checking.validate_challan_duplicate",
+        "before_save": "bellamoosh_erp.bellamoosh_erp.doctype.taka_checking.taka_checking.before_save_purchase_receipt",
         "on_submit": "bellamoosh_erp.bellamoosh_erp.doctype.taka_checking.taka_checking.auto_generate_taka_nos",
     },
     "Stock Entry": {
